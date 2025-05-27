@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Menghilangkan scrollbar untuk semua browser */
+/* Untuk Chrome, Safari, dan Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Untuk Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Untuk IE dan Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Urbanist', sans-serif;
+}
+
+html, body, #root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100vw;
+  font-family: 'Urbanist', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+p, a, button, span, div {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 500;
+}
