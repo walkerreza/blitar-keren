@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FaClock, FaTicketAlt, FaMapMarkerAlt, FaCalendarAlt, FaInfoCircle } from 'react-icons/fa';
 import LocationMap from '../molecules/LocationMap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function DestinationInfo() {
+  const navigate = useNavigate();
+  // Check login status from localStorage
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   // State to store destination data
   const [destinationInfo, setDestinationInfo] = useState({
     name: "Mount Kelud",
@@ -219,11 +222,18 @@ function DestinationInfo() {
                   </div>
                   <div className="ml-14">
                     <p className="text-gray-700">{destinationInfo.bookingInfo}</p>
-                    <Link to="/ticket-order">
-                      <button className="mt-4 bg-[#CC1720] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                        Book Ticket Now
-                      </button>
-                    </Link>
+                    <button 
+                      onClick={() => {
+                        if (!isLoggedIn) {
+                          navigate('/login');
+                        } else {
+                          navigate('/ticket-order');
+                        }
+                      }}
+                      className="mt-4 bg-[#CC1720] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                    >
+                      Book Ticket Now
+                    </button>
                   </div>
                 </div>
               </div>

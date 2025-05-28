@@ -16,7 +16,8 @@ function BlitarMap() {
         lat: -7.9333, 
         lng: 112.3083
       },
-      description: "Mount Kelud is one of East Java's most active volcanoes, offering breathtaking views of its crater lake."
+      description: "Mount Kelud is one of East Java's most active volcanoes, offering breathtaking views of its crater lake.",
+      image: "/src/assets/images/gunung kelud.jpg"
     },
     {
       id: 2,
@@ -26,7 +27,8 @@ function BlitarMap() {
         lat: -8.0163, 
         lng: 112.2091
       },
-      description: "Discover the largest Hindu temple complex in East Java. Built over several centuries, Penataran Temple showcases intricate carvings and rich historical significance."
+      description: "Discover the largest Hindu temple complex in East Java. Built over several centuries, Penataran Temple showcases intricate carvings and rich historical significance.",
+      image: "/src/assets/images/candi penataran.jpg"
     },
     {
       id: 3,
@@ -36,7 +38,8 @@ function BlitarMap() {
         lat: -8.0798, 
         lng: 112.1672
       },
-      description: "Visit the final resting place of Indonesia's first president, Sukarno. This historical site features beautiful architecture and offers insights into Indonesia's struggle for independence."
+      description: "Visit the final resting place of Indonesia's first president, Sukarno. This historical site features beautiful architecture and offers insights into Indonesia's struggle for independence.",
+      image: "/src/assets/images/Makam_Soekarno.jpg"
     },
     {
       id: 4,
@@ -46,7 +49,8 @@ function BlitarMap() {
         lat: -8.0978, 
         lng: 112.1763
       },
-      description: "Istana Gebang is the childhood home of President Sukarno that has been converted into a museum."
+      description: "Istana Gebang is the childhood home of President Sukarno that has been converted into a museum.",
+      image: "/src/assets/images/istana-gebang-blitar.jpg"
     },
     {
       id: 5,
@@ -56,7 +60,8 @@ function BlitarMap() {
         lat: -8.3189, 
         lng: 112.1253
       },
-      description: "Tambakrejo Beach offers stunning views with its exotic black sand and waves suitable for surfing."
+      description: "Tambakrejo Beach offers stunning views with its exotic black sand and waves suitable for surfing.",
+      image: "/src/assets/images/pantai_Tambakrejo.jpg"
     },
     {
       id: 6,
@@ -66,7 +71,8 @@ function BlitarMap() {
         lat: -8.3278, 
         lng: 112.3417
       },
-      description: "Serang Beach is one of the most beautiful beaches in Blitar with its clean white sand and clear seawater."
+      description: "Serang Beach is one of the most beautiful beaches in Blitar with its clean white sand and clear seawater.",
+      image: "/src/assets/images/pantai-serang.jpg"
     },
     {
       id: 7,
@@ -76,7 +82,8 @@ function BlitarMap() {
         lat: -8.3174, 
         lng: 112.2051
       },
-      description: "Jolosutro Beach is one of the beaches that is still natural with soft black sand and quite large waves."
+      description: "Jolosutro Beach is one of the beaches that is still natural with soft black sand and quite large waves.",
+      image: "/src/assets/images/Pantai-Jolosutro.jpg"
     },
     {
       id: 8,
@@ -86,7 +93,8 @@ function BlitarMap() {
         lat: -7.9917, 
         lng: 112.2639
       },
-      description: "Coban Wilis Waterfall is one of the amazing waterfalls in Blitar that was affected by the eruption of Mount Kelud in 2014."
+      description: "Coban Wilis Waterfall is one of the amazing waterfalls in Blitar that was affected by the eruption of Mount Kelud in 2014.",
+      image: "/src/assets/images/coban wilis.jpg"
     },
     {
       id: 9,
@@ -96,7 +104,8 @@ function BlitarMap() {
         lat: -8.2583, 
         lng: 112.3639
       },
-      description: "Jurug Bening Waterfall is a natural tourist destination that offers the beauty of a waterfall with exotic black rocks."
+      description: "Jurug Bening Waterfall is a natural tourist destination that offers the beauty of a waterfall with exotic black rocks.",
+      image: "/src/assets/images/jurug bening.webp"
     }
   ];
   
@@ -183,21 +192,38 @@ function BlitarMap() {
         // Add markers for all destinations
         destinations.forEach(destination => {
           const { mapLocation, title, subtitle, description } = destination;
-          const locationMarker = L.marker([mapLocation.lat, mapLocation.lng]).addTo(map);
+          // Membuat custom icon untuk marker dengan thumbnail
+      const customIcon = L.divIcon({
+        className: 'custom-map-marker',
+        html: `<div style="background-image: url('${destination.image}'); width: 36px; height: 36px; background-size: cover; background-position: center; border-radius: 50%; border: 3px solid #CC1720;"></div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+        popupAnchor: [0, -20]
+      });
+      
+      // Menggunakan custom icon untuk marker
+      const locationMarker = L.marker([mapLocation.lat, mapLocation.lng], { icon: customIcon }).addTo(map);
           
-          // Create popup with destination information
-          const popupContent = `
-            <div class="popup-content">
-              <h3 style="font-weight: bold; margin-bottom: 5px;">${title}</h3>
-              <p style="font-style: italic; margin-bottom: 8px;">${subtitle}</p>
-              <p style="font-size: 0.9em;">${description.substring(0, 100)}...</p>
-              <button 
-                id="btn-${destination.id}" 
-                style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; margin-top: 8px;"
-              >
-                View Details
-              </button>
+          // Create popup with destination information and thumbnail image
+      const popupContent = `
+        <div class="popup-content">
+          <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="flex: 0 0 80px; margin-right: 10px;">
+              <img src="${destination.image}" alt="${title}" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px;" />
             </div>
+            <div>
+              <h3 style="font-weight: bold; margin-bottom: 5px;">${title}</h3>
+              <p style="font-style: italic; margin-bottom: 0;">${subtitle}</p>
+            </div>
+          </div>
+          <p style="font-size: 0.9em; margin-bottom: 10px;">${description.substring(0, 100)}...</p>
+          <button 
+            id="btn-${destination.id}" 
+            style="background-color: #CC1720; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; width: 100%;"
+          >
+            View Details
+          </button>
+        </div>
           `;
           
           // Add popup to marker

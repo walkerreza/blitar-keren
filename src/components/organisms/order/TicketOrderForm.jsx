@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaTicketAlt, FaCalendar, FaUser, FaEnvelope, FaPhone, FaIdCard, FaMapMarkerAlt, FaCreditCard, FaCheck } from 'react-icons/fa';
+import { FaTicketAlt, FaCalendar, FaUser, FaEnvelope, FaPhone, FaIdCard, FaMapMarkerAlt, FaCreditCard, FaCheck, FaTimes } from 'react-icons/fa';
 
 function TicketOrderForm() {
   const navigate = useNavigate();
@@ -21,6 +21,9 @@ function TicketOrderForm() {
     paymentMethod: "bank_transfer",
     isPaid: false
   });
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [orderNumber, setOrderNumber] = useState("");
   
   const [totalPrice, setTotalPrice] = useState(0);
   const [showPaymentConfirmation, setShowPaymentConfirmation] = useState(false);
@@ -99,49 +102,20 @@ function TicketOrderForm() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Generate a random order number
+    const randomOrderNumber = 'ORDER-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    setOrderNumber(randomOrderNumber);
     
-    // Check login status sebelum melanjutkan
-    if (!isLoggedIn) {
-      navigate('/', { state: { message: 'Please login first to book tickets' } });
-      return;
-    }
+    // Here you would typically send the form data to your backend
+    console.log('Form submitted:', { ...formData, orderNumber: randomOrderNumber });
     
-    if (!showPaymentConfirmation) {
-      // Show payment confirmation
-      setShowPaymentConfirmation(true);
-      return;
-    }
-    
-    // Generate order number
-    const orderNumber = 'BLT' + Date.now().toString().slice(-8);
-    
-    // Set order as complete with payment status
-    const completedOrder = {
-      ...formData,
-      orderNumber,
-      destination: destination.name,
-      location: destination.location,
-      totalPrice,
-      orderDate: new Date().toISOString(),
-      status: "Paid",
-      isPaid: true,
-      username: username // Tambahkan username ke data order
-    };
-    
-    // Save order to localStorage
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    orders.push(completedOrder);
-    localStorage.setItem('orders', JSON.stringify(orders));
-    
-    // Set order as complete
-    setOrderComplete(true);
-    
-    // Redirect to home page after 3 seconds
-    setTimeout(() => {
-      navigate('/');
-    }, 3000);
-    
-    // Reset formulir
+    // Show the popup instead of payment confirmation
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -153,8 +127,10 @@ function TicketOrderForm() {
       paymentMethod: "bank_transfer",
       isPaid: false
     });
+    // Navigate to home
+    navigate('/');
   };
-  
+
   // Handle payment method changes
   const handlePaymentMethodChange = (method) => {
     setFormData(prevData => ({
@@ -365,62 +341,6 @@ function TicketOrderForm() {
                       <span className="text-[#CC1720]">{formatRupiah(totalPrice)}</span>
                     </div>
                   </div>
-                  
-                  {showPaymentConfirmation && (
-                    <div className="bg-white border border-gray-200 rounded-lg p-4 mt-6 shadow-sm">
-                      <h4 className="font-semibold text-gray-800 mb-4 flex items-center">
-                        <FaCreditCard className="mr-2 text-[#CC1720]" />
-                        Metode Pembayaran
-                      </h4>
-                      
-                      <div className="space-y-3">
-                        <div 
-                          className={`border rounded-lg p-3 cursor-pointer ${formData.paymentMethod === 'bank_transfer' ? 'border-[#CC1720] bg-red-50' : 'border-gray-200 hover:border-gray-300'}`}
-                          onClick={() => handlePaymentMethodChange('bank_transfer')}
-                        >
-                          <div className="flex items-center">
-                            <div className={`w-4 h-4 rounded-full mr-3 border ${formData.paymentMethod === 'bank_transfer' ? 'border-[#CC1720] bg-[#CC1720]' : 'border-gray-300'}`}></div>
-                            <div className="flex-grow">
-                              <p className="font-medium text-gray-800">Transfer Bank</p>
-                              <p className="text-xs text-gray-500">BCA, BNI, BRI, Mandiri</p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div 
-                          className={`border rounded-lg p-3 cursor-pointer ${formData.paymentMethod === 'e_wallet' ? 'border-[#CC1720] bg-red-50' : 'border-gray-200 hover:border-gray-300'}`}
-                          onClick={() => handlePaymentMethodChange('e_wallet')}
-                        >
-                          <div className="flex items-center">
-                            <div className={`w-4 h-4 rounded-full mr-3 border ${formData.paymentMethod === 'e_wallet' ? 'border-[#CC1720] bg-[#CC1720]' : 'border-gray-300'}`}></div>
-                            <div className="flex-grow">
-                              <p className="font-medium text-gray-800">E-Wallet</p>
-                              <p className="text-xs text-gray-500">OVO, GoPay, DANA, LinkAja</p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div 
-                          className={`border rounded-lg p-3 cursor-pointer ${formData.paymentMethod === 'credit_card' ? 'border-[#CC1720] bg-red-50' : 'border-gray-200 hover:border-gray-300'}`}
-                          onClick={() => handlePaymentMethodChange('credit_card')}
-                        >
-                          <div className="flex items-center">
-                            <div className={`w-4 h-4 rounded-full mr-3 border ${formData.paymentMethod === 'credit_card' ? 'border-[#CC1720] bg-[#CC1720]' : 'border-gray-300'}`}></div>
-                            <div className="flex-grow">
-                              <p className="font-medium text-gray-800">Credit Card</p>
-                              <p className="text-xs text-gray-500">Visa, Mastercard, JCB</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                        <p className="text-sm text-blue-800">
-                          <strong>Note:</strong> For demo purposes, all payment methods will automatically be considered "Paid" when the confirmation button is pressed.
-                        </p>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -465,7 +385,7 @@ function TicketOrderForm() {
                     type="submit"
                     className="bg-[#CC1720] text-white px-8 py-3 rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
                   >
-                    {showPaymentConfirmation ? 'Confirm Payment' : 'Book Ticket Now'}
+                    Book Ticket Now
                   </button>
                   <p className="text-sm text-gray-500 mt-2">
                     By pressing the button above, you agree to the applicable terms and conditions
@@ -476,6 +396,64 @@ function TicketOrderForm() {
           </form>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-black bg-opacity-50 absolute inset-0"></div>
+          <div className="bg-white p-8 rounded-lg shadow-xl relative max-w-md w-full mx-4">
+            <div className="absolute top-4 right-4">
+              <button 
+                onClick={closePopup}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <FaTimes size={24} />
+              </button>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaCheck className="text-green-500" size={32} />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Order Successful!</h3>
+              <p className="text-gray-600 mb-4">Your order has been successfully placed.</p>
+              
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <p className="text-gray-700 font-medium mb-2">Order Number:</p>
+                <p className="text-xl font-bold text-[#CC1720]">{orderNumber}</p>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                <p className="text-gray-700 font-medium mb-2">Total Amount:</p>
+                <p className="text-2xl font-bold text-[#CC1720]">Rp {totalPrice.toLocaleString()}</p>
+              </div>
+
+              <div className="space-y-4 text-left mb-6">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600">Bank Transfer:</span>
+                  <span className="font-medium">BCA 1234567890</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600">Account Name:</span>
+                  <span className="font-medium">PT Blitar Tourism</span>
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-500 mb-6">
+                Please complete your payment within 24 hours to secure your booking.
+                Save your order number for future reference.
+              </p>
+
+              <button
+                onClick={closePopup}
+                className="w-full bg-[#CC1720] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-all duration-300"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

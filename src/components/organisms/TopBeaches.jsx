@@ -124,9 +124,9 @@ function TopBeaches() {
     <section className="py-12 bg-white w-full">
       <div className="w-full px-4 md:px-8 lg:px-12">
         <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-xl font-bold">Top Beaches in Blitar</h2>
-            <p className="text-sm text-gray-500">Explore the beautiful coastline of Blitar</p>
+          <div className="text-left">
+            <h2 className="text-xl font-bold text-left">Top Beaches in Blitar</h2>
+            <p className="text-sm text-gray-500 text-left">Explore the beautiful coastline of Blitar</p>
           </div>
           <div className="flex space-x-2">
             <button 

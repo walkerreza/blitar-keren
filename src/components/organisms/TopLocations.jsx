@@ -125,9 +125,9 @@ function TopLocations() {
     <section className="py-12 bg-white w-full">
       <div className="w-full px-4 md:px-8 lg:px-12">
         <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-xl font-bold">Top Destinations in Blitar</h2>
-            <p className="text-sm text-gray-500">Discover the most beautiful places in Blitar region</p>
+          <div className="text-left">
+            <h2 className="text-xl font-bold text-left">Top Destinations in Blitar</h2>
+            <p className="text-sm text-gray-500 text-left">Discover the most beautiful places in Blitar region</p>
           </div>
           <div className="flex space-x-2">
             <button 

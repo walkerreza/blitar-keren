@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ArticleCard from '../molecules/ArticleCard';
+import { Link } from 'react-router-dom';
 
 function TopSelections() {
   const articles = [
@@ -39,14 +40,14 @@ function TopSelections() {
     <section className="py-12 bg-white w-full">
       <div className="w-full px-4 md:px-8 lg:px-12">
         <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-xl font-bold">Top Travel Stories in Blitar</h2>
-            <p className="text-sm text-gray-500">Explore the breathtaking beauty of Blitar through our travelers' experiences</p>
+          <div className="text-left">
+            <h2 className="text-xl font-bold text-left">Top Travel Stories in Blitar</h2>
+            <p className="text-sm text-gray-500 text-left">Explore the breathtaking beauty of Blitar through our travelers' experiences</p>
           </div>
           <div>
-            <button className="text-red-600 text-sm font-medium hover:text-red-700">
+            <Link to="/stories" className="text-red-600 text-sm font-medium hover:text-red-700 cursor-pointer">
               VIEW ALL STORIES
-            </button>
+            </Link>
           </div>
         </div>
 

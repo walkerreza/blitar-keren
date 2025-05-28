@@ -4,6 +4,7 @@ function CreateReview() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [location, setLocation] = useState('');
+  const [destination, setDestination] = useState('');
   const [rating, setRating] = useState(5);
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -24,11 +25,12 @@ function CreateReview() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logic to send review to server
-    console.log({ title, content, location, rating, image });
+    console.log({ title, content, location, destination, rating, image });
     // Reset form
     setTitle('');
     setContent('');
     setLocation('');
+    setDestination('');
     setRating(5);
     setImage(null);
     setImagePreview(null);
@@ -80,17 +82,34 @@ function CreateReview() {
               
               <div className="col-span-1">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Where did you travel?</label>
-                <select 
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC1720] focus:border-transparent"
-                  required
-                >
+                <div className="relative">
+                  <select 
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#CC1720] focus:border-[#CC1720]"
+                    required
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    style={{ height: '150px' }}
+                  >
                   <option value="">Select Place</option>
-                  <option value="Gunung Kelud">Gunung Kelud</option>
-                  <option value="Candi Penataran">Candi Penataran</option>
-                  <option value="Makam Bung Karno">Makam Bung Karno</option>
-                  <option value="Pantai Tambakrejo">Pantai Tambakrejo</option>
+                  <option value="Mount Kelud">Mount Kelud</option>
+                  <option value="Penataran Temple">Penataran Temple</option>
+                  <option value="Bung Karno Tomb">Bung Karno Tomb</option>
+                  <option value="Istana Gebang">Istana Gebang</option>
+                  <option value="Tambakrejo Beach">Tambakrejo Beach</option>
+                  <option value="Serang Beach">Serang Beach</option>
+                  <option value="Jolosutro Beach">Jolosutro Beach</option>
+                  <option value="Pangi Beach">Pangi Beach</option>
+                  <option value="Pasur Beach">Pasur Beach</option>
+                  <option value="Peh Beach">Peh Beach</option>
+                  <option value="Coban Wilis Waterfall">Coban Wilis Waterfall</option>
+                  <option value="Jurug Bening Waterfall">Jurug Bening Waterfall</option>
+                  <option value="Maliran Deer Conservation">Maliran Deer Conservation</option>
+                  <option value="Kebon Rojo Park">Kebon Rojo Park</option>
                   <option value="Kampung Coklat">Kampung Coklat</option>
+                  <option value="Taman Pecut">Taman Pecut</option>
+                  <option value="Grebek Pancasila">Grebek Pancasila</option>
                 </select>
+                </div>
               </div>
               
               <div className="col-span-1 md:col-span-2">
