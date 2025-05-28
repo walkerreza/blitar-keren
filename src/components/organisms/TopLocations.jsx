@@ -42,39 +42,68 @@ function TopLocations() {
   const containerRef = useRef(null);
   const itemsPerPage = 3;
   
-  // Efek untuk animasi scroll
+  // Effect for scroll animation with smooth door-like sliding and fade effect
   useEffect(() => {
     if (containerRef.current) {
-      containerRef.current.style.transition = 'transform 0.5s ease-in-out';
       if (isAnimating) {
-        containerRef.current.style.transform = slideDirection === 'right' ? 'translateX(-100%)' : 'translateX(100%)';
+        // Prepare for animation
+        containerRef.current.style.transition = 'none';
+        containerRef.current.style.transform = 'translateX(0)';
+        containerRef.current.style.opacity = '1';
         
-        // Reset setelah animasi selesai
-        const timer = setTimeout(() => {
+        // Force reflow
+        containerRef.current.offsetHeight;
+        
+        // First phase: fade out and start sliding
+        containerRef.current.style.transition = 'opacity 0.3s ease-out, transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        containerRef.current.style.opacity = '0.3';
+        containerRef.current.style.transform = slideDirection === 'right' ? 'translateX(-30%)' : 'translateX(30%)';
+        
+        // Second phase: complete slide and fade in new content
+        const timer1 = setTimeout(() => {
+          // Change content while it's faded out
+          setCurrentIndex((prevIndex) => {
+            if (slideDirection === 'right') {
+              const nextIndex = prevIndex + itemsPerPage;
+              return nextIndex >= locations.length ? 0 : nextIndex;
+            } else {
+              const nextIndex = prevIndex - itemsPerPage;
+              return nextIndex < 0 ? Math.max(0, locations.length - itemsPerPage) : nextIndex;
+            }
+          });
+          
+          // Prepare for entrance animation
           containerRef.current.style.transition = 'none';
+          containerRef.current.style.transform = slideDirection === 'right' ? 'translateX(30%)' : 'translateX(-30%)';
+          
+          // Force reflow
+          containerRef.current.offsetHeight;
+          
+          // Animate entrance
+          containerRef.current.style.transition = 'opacity 0.3s ease-in, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          containerRef.current.style.opacity = '1';
           containerRef.current.style.transform = 'translateX(0)';
-          setIsAnimating(false);
-        }, 500);
+          
+          // Animation complete
+          const timer2 = setTimeout(() => {
+            setIsAnimating(false);
+          }, 600);
+          
+          return () => clearTimeout(timer2);
+        }, 300);
         
-        return () => clearTimeout(timer);
+        return () => clearTimeout(timer1);
       } else {
+        containerRef.current.style.opacity = '1';
         containerRef.current.style.transform = 'translateX(0)';
       }
     }
-  }, [isAnimating, slideDirection]);
+  }, [isAnimating, slideDirection, locations.length, itemsPerPage]);
   
   const nextPage = () => {
     if (!isAnimating) {
       setSlideDirection('right');
       setIsAnimating(true);
-      
-      // Ubah index setelah animasi mulai
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) => {
-          const nextIndex = prevIndex + itemsPerPage;
-          return nextIndex >= locations.length ? 0 : nextIndex;
-        });
-      }, 250);
     }
   };
   
@@ -82,18 +111,10 @@ function TopLocations() {
     if (!isAnimating) {
       setSlideDirection('left');
       setIsAnimating(true);
-      
-      // Ubah index setelah animasi mulai
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) => {
-          const nextIndex = prevIndex - itemsPerPage;
-          return nextIndex < 0 ? Math.max(0, locations.length - itemsPerPage) : nextIndex;
-        });
-      }, 250);
     }
   };
 
-  // Mengambil 3 lokasi yang akan ditampilkan berdasarkan currentIndex
+  // Get 3 locations to display based on currentIndex
   const visibleLocations = [];
   for (let i = 0; i < itemsPerPage; i++) {
     const index = (currentIndex + i) % locations.length;
@@ -130,7 +151,8 @@ function TopLocations() {
           </div>
         </div>
 
-        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4 transition-all duration-500 ease-in-out overflow-hidden">
+        <div className="overflow-hidden relative">
+          <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {visibleLocations.map(location => (
             <LocationCard 
               key={location.id}
@@ -139,6 +161,7 @@ function TopLocations() {
               onClick={() => console.log(`Clicked on ${location.title}`)}
             />
           ))}
+          </div>
         </div>
       </div>
     </section>

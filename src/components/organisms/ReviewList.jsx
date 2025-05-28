@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// Import local images
+import kelud from '../../assets/images/gunung kelud.jpg';
+import serangBeach from '../../assets/images/pantai-serang.jpg';
+import makamSoekarno from '../../assets/images/Makam_Soekarno.jpg';
+
 function ReviewList() {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('all');
   const [reviews, setReviews] = useState([
-    // Data default jika tidak ada review di localStorage
+    // Default data if no reviews in localStorage
   
     {
       id: 1,
       title: 'A Wonderful Journey to Mount Kelud',
-      image: 'https://asset.kompas.com/crops/oDTMd3mxLQ_XLl5Ij_YHnOsHiWA=/0x0:1000x667/750x500/data/photo/2021/12/16/61bb2c3a6a7e3.jpg',
+      image: kelud,
       description: 'Mount Kelud is one of the most active volcanoes in East Java. Located at the border of Kediri, Blitar, and Malang regencies, this mountain offers breathtaking natural scenery with its crater and beautiful lake. The hiking trail is well-maintained and suitable for beginners.',
       author: 'John Smith',
       date: '3 days ago',
@@ -22,7 +27,7 @@ function ReviewList() {
     {
       id: 2,
       title: 'Relaxing Day at Serang Beach',
-      image: 'https://asset.kompas.com/crops/QCw-ad0KtYAoz9lL3AoKfhDEr_4=/0x0:1000x667/750x500/data/photo/2022/05/24/628c8d5a6ffc7.jpg',
+      image: serangBeach,
       description: 'Serang Beach in Blitar offers a perfect getaway with its soft white sand and clear blue sea. The beach has various activities like ATV riding and delicious seafood stalls. The sunset view is absolutely stunning and worth waiting for. Highly recommended for beach lovers!',
       author: 'Emily Johnson',
       date: '1 week ago',
@@ -34,7 +39,7 @@ function ReviewList() {
     {
       id: 3,
       title: 'Historical Visit to Bung Karno Tomb',
-      image: 'https://asset.kompas.com/crops/RwRpCEqLwo9xYB6_riX3C5XcTxI=/0x0:1000x667/750x500/data/photo/2021/11/08/6188f37e4e38c.jpg',
+      image: makamSoekarno,
       description: 'Visiting Bung Karno Tomb in Blitar was a meaningful experience. The site is well-maintained with beautiful architecture and gardens. It offers great insights into Indonesia\'s history and the life of its first president. The museum section displays interesting artifacts and photographs from Sukarno\'s life.',
       author: 'Michael Wong',
       date: '2 weeks ago',
@@ -45,15 +50,15 @@ function ReviewList() {
     }
   ]);
 
-  // Mengambil data review dari localStorage saat komponen dimuat
+  // Get review data from localStorage when component is loaded
   useEffect(() => {
     const savedReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
     
-    // Jika ada data review di localStorage, tambahkan ke data default
+    // If there is review data in localStorage, add to default data
     if (savedReviews.length > 0) {
       setReviews(savedReviews);
     } else {
-      // Data default jika tidak ada review di localStorage
+      // Default data if no reviews in localStorage
       setReviews([
         {
           id: 1,
@@ -95,7 +100,7 @@ function ReviewList() {
     }
   }, []);
 
-  // Fungsi untuk menampilkan rating bintang
+  // Function to display star rating
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -141,11 +146,6 @@ function ReviewList() {
             onClick={() => navigate('/create-review')}
             readOnly
           />
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
         </div>
         
         {/* Filter and Title */}
@@ -166,26 +166,21 @@ function ReviewList() {
           </button>
         </div>
         
-        {/* Daftar Review */}
+        {/* Review List */}
         <div className="space-y-8">
           {reviews.map(review => (
             <div key={review.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/3 h-48 md:h-auto relative">
-                  {!review.image || review.image === '' ? (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                  ) : (
-                    <img 
-                      src={review.image} 
-                      alt={review.title} 
-                      className="w-full h-full object-cover"
-                    />
-                  )}
+                  <img 
+                    src={review.image} 
+                    alt={review.title} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://placehold.co/600x400/gray/white?text=No+Image';
+                    }}
+                  />
                 </div>
                 <div className="md:w-2/3 p-6">
                   <div className="mb-2">

@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function DestinationHero() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Function to handle search
+  const handleSearch = () => {
+    // Save search parameters to localStorage
+    const searchParams = {
+      query: searchQuery,
+      timestamp: new Date().getTime() // Add timestamp to ensure changes are detected
+    };
+    localStorage.setItem('destinationSearchParams', JSON.stringify(searchParams));
+    
+    // If already on destination page, use state to trigger re-render
+    if (location.pathname === '/destination') {
+      // Navigate with replace to avoid adding to history
+      navigate('/destination', { replace: true, state: { refresh: Date.now() } });
+    } else {
+      // Navigate to destination page with search parameters
+      navigate('/destination', { state: { refresh: Date.now() } });
+    }
+  };
   return (
     <div className="relative h-[50vh] w-full">
       {/* Background image */}
@@ -23,34 +46,22 @@ function DestinationHero() {
         {/* Search box */}
         <div className="w-full max-w-3xl mt-8 bg-white rounded-lg shadow-lg p-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
-              <label className="block text-gray-700 text-sm font-medium mb-1">Where do you want to go?</label>
+            <div className="flex-grow">
+              <label className="block text-gray-800 text-sm font-medium mb-1">Where do you want to go?</label>
               <input 
                 type="text" 
                 placeholder="Search destination" 
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500 text-gray-800"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               />
-            </div>
-            <div className="flex-1">
-              <label className="block text-gray-700 text-sm font-medium mb-1">When?</label>
-              <input 
-                type="date" 
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-            </div>
-            <div className="flex-1">
-              <label className="block text-gray-700 text-sm font-medium mb-1">Tour Package</label>
-              <select className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
-                <option>All Destinations</option>
-                <option>Historical Sites</option>
-                <option>Beaches</option>
-                <option>Mountains</option>
-                <option>Waterfalls</option>
-                <option>Parks & Gardens</option>
-              </select>
             </div>
             <div className="flex items-end">
-              <button className="bg-[#CC1720] text-white py-2 px-4 rounded hover:bg-red-700 transition-colors">
+              <button 
+                className="bg-[#CC1720] text-white py-2 px-4 rounded hover:bg-red-700 transition-colors"
+                onClick={handleSearch}
+              >
                 Search
               </button>
             </div>

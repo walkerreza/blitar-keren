@@ -7,7 +7,7 @@ function Footer() {
         <div className="flex flex-col items-center justify-center text-center">
           <img 
             src="https://dinaspupr.blitarkota.go.id/uploads/dokumen/Branding%20Blitar%202.png" 
-            alt="Wisata Blitar Logo" 
+            alt="Blitar Tourism Logo" 
             className="h-20 w-[100px] transition-opacity duration-300 brightness-0 invert" 
           />
           <p className="text-sm font-medium mb-2">© 2023 Blitar Keren. All rights reserved</p>

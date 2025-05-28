@@ -50,7 +50,7 @@ function StreetViewTour() {
           </div>
         </div>
         
-        {/* Container untuk Street View */}
+        {/* Container for Street View */}
         <iframe 
           src={tourLocations[activeLocation].embedUrl} 
           className="w-full flex-grow" 

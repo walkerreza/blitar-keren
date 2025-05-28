@@ -28,13 +28,13 @@ function CreateReviewForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Membuat objek review baru
+    // Create new review object
     const newReview = {
-      id: Date.now(), // Menggunakan timestamp sebagai ID unik
+      id: Date.now(), // Use timestamp as unique ID
       title: title,
       description: content,
       image: imagePreview || '',
-      author: 'Anda', // Bisa diganti dengan nama pengguna jika ada sistem login
+      author: 'Anda', // Can be replaced with username if login system exists
       date: new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }),
       rating: rating,
       reviews: 1,
@@ -42,18 +42,18 @@ function CreateReviewForm() {
       place: place
     };
     
-    // Mengambil data review yang sudah ada dari localStorage
+    // Get existing reviews from localStorage
     const existingReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
     
-    // Menambahkan review baru ke array
+    // Add new review to array
     const updatedReviews = [newReview, ...existingReviews];
     
-    // Menyimpan kembali ke localStorage
+    // Save back to localStorage
     localStorage.setItem('reviews', JSON.stringify(updatedReviews));
     
-    console.log('Review berhasil disimpan:', newReview);
+    console.log('Review successfully saved:', newReview);
     
-    // Kembali ke halaman reviews
+    // Return to reviews page
     navigate('/reviews');
   };
 
@@ -164,7 +164,7 @@ function CreateReviewForm() {
                       </svg>
                     </button>
                   ))}
-                  <span className="ml-2 text-xs text-gray-600">{rating} dari 5 bintang</span>
+                  <span className="ml-2 text-xs text-gray-600">{rating} out of 5 stars</span>
                 </div>
               </div>
               

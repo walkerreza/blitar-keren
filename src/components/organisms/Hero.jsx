@@ -4,12 +4,12 @@ import Button from '../atoms/Button';
 function Hero() {
   const videoRef = useRef(null);
   
-  // Daftar tempat wisata di Blitar
+  // List of tourist spots in Blitar
   const touristSpots = [
 
   ];
   
-  // Efek untuk memastikan video diputar secara otomatis dan diulang
+  // Effect to ensure video is played automatically and looped
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(error => {
@@ -20,7 +20,7 @@ function Hero() {
 
   return (
     <section id="beranda" className="relative h-screen w-full" style={{width: '100vw', maxWidth: '100vw', margin: 0, padding: 0, overflow: 'hidden'}}>
-      {/* Video Background (YouTube Embed) dengan rasio aspek responsif untuk semua perangkat */}
+      {/* Video Background (YouTube Embed) with responsive aspect ratio for all devices */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <video
@@ -44,7 +44,7 @@ function Hero() {
             }}
           >
             <source src="/src/assets/Video/Menyusuri Untaian Sejarah dan Keindahan Alam di Kota Blitar.mp4" type="video/mp4" />
-            Maaf, browser Anda tidak mendukung tag video.
+            Sorry, your browser does not support the video tag.
           </video>
         </div>
       </div>

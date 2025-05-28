@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function DetailStoriesHero() {
+  // State to store destination data
+  const [destination, setDestination] = useState({
+    title: "KELUD",
+    subtitle: "Blitar, East Java",
+    image: "https://asset.kompas.com/crops/oDTMd3mxLQ_XLl5Ij_YHnOsHiWA=/0x0:1000x667/750x500/data/photo/2021/12/16/61bb2c3a6a7e3.jpg",
+    description: "One of East Java's most active volcanoes with a stunning crater lake"
+  });
+  
+  // Get destination data from localStorage when component is loaded
+  useEffect(() => {
+    const savedDestination = JSON.parse(localStorage.getItem('selectedDestination'));
+    if (savedDestination) {
+      setDestination({
+        title: savedDestination.title.toUpperCase(),
+        subtitle: savedDestination.subtitle || "Blitar, East Java",
+        image: savedDestination.image,
+        description: savedDestination.description
+      });
+    }
+  }, []);
 
   return (
     <div className="relative min-h-[80vh] w-full">
       {/* Background image with parallax effect */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-          src="https://asset.kompas.com/crops/oDTMd3mxLQ_XLl5Ij_YHnOsHiWA=/0x0:1000x667/750x500/data/photo/2021/12/16/61bb2c3a6a7e3.jpg" 
+          src={destination.image} 
           className="w-full h-full object-cover transform scale-110"
-          alt="Gunung Kelud"
+          alt={destination.title}
           style={{ transformOrigin: 'center center' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80"></div>
@@ -27,10 +47,10 @@ function DetailStoriesHero() {
               WebkitTextStroke: '2px white',
               textShadow: '0 0 10px rgba(255,255,255,0.3)'
             }}>
-              KELUD
+              {destination.title}
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              One of East Java's most active volcanoes with a stunning crater lake
+              {destination.description}
             </p>
           </div>
 

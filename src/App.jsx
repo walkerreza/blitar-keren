@@ -6,6 +6,8 @@ import DetailStoriesPage from './pages/DetailStoriesPage'
 import StoriesPage from './pages/StoriesPage'
 import ReviewPage from './pages/ReviewPage'
 import CreateReviewPage from './pages/CreateReviewPage'
+import TicketOrderPage from './pages/TicketOrderPage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/detail-stories" element={<DetailStoriesPage />} />
           <Route path="/reviews" element={<ReviewPage />} />
           <Route path="/create-review" element={<CreateReviewPage />} />
+          <Route path="/ticket-order" element={<TicketOrderPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </Router>

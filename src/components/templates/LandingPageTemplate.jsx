@@ -16,13 +16,13 @@ function LandingPageTemplate() {
       <Hero />
       <Sponsors />
       <Features />
-      <div className="container mx-auto px-4 my-8">
+      <div className="container mx-auto px-4 my-8 relative z-0">
         <h2 className="text-3xl font-bold text-center mb-6">Explore Blitar</h2>
         <div className="flex flex-col md:flex-row gap-4">
           <div className="md:w-3/5">
             <StreetViewTour />
           </div>
-          <div className="md:w-2/5">
+          <div className="md:w-2/5 relative">
             <BlitarMap />
           </div>
         </div>
