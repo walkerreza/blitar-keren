@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import candiPenataran from '../../assets/images/candi penataran.jpg';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function DestinationHero() {
@@ -29,7 +30,7 @@ function DestinationHero() {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="src/assets/images/Taman_Pecut.jpg" 
+          src={candiPenataran} 
           alt="Penataran Temple Blitar" 
           className="w-full h-full object-cover"
         />
