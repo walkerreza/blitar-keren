@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import LocationCard from '../molecules/LocationCard';
 
+import gunungKelud from '../../assets/images/gunung kelud.jpg';
+import candiPenataran from '../../assets/images/candi penataran.jpg';
+import makamSoekarno from '../../assets/images/Makam_Soekarno.jpg';
+import istanaGebang from '../../assets/images/istana-gebang-blitar.jpg';
+import pantaiTambakrejo from '../../assets/images/pantai_Tambakrejo.jpg';
+import pantaiSerang from '../../assets/images/pantai-serang.jpg';
+import pantaiJolosutro from '../../assets/images/Pantai-Jolosutro.jpg';
+import cobanWilis from '../../assets/images/coban wilis.jpg';
+import jurugBening from '../../assets/images/jurug bening.webp';
+import maliranDeer from '../../assets/images/maliran deer.webp';
+import kebonRojo from '../../assets/images/kebon rojo.jpg';
+import blitarJadoel from '../../assets/images/blitar-jadoel.jpg';
+
 function DestinationGrid() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,7 +32,7 @@ function DestinationGrid() {
   const destinations = [
     {
       id: 1,
-      image: "/src/assets/images/gunung kelud.jpg",
+      image: gunungKelud,
       title: "Mount Kelud",
       subtitle: "Blitar, East Java",
       mapLocation: {
@@ -43,7 +56,7 @@ function DestinationGrid() {
     },
     {
       id: 2,
-      image: "/src/assets/images/candi penataran.jpg",
+      image: candiPenataran,
       title: "Penataran Temple",
       subtitle: "Blitar, East Java",
       mapLocation: {
@@ -67,7 +80,7 @@ function DestinationGrid() {
     },
     {
       id: 3,
-      image: "/src/assets/images/Makam_Soekarno.jpg",
+      image: makamSoekarno,
       title: "Bung Karno Tomb",
       subtitle: "Blitar City",
       mapLocation: {
@@ -91,7 +104,7 @@ function DestinationGrid() {
     },
     {
       id: 4,
-      image: "/src/assets/images/istana-gebang-blitar.jpg",
+      image: istanaGebang,
       title: "Istana Gebang",
       subtitle: "Blitar City",
       mapLocation: {
@@ -114,7 +127,7 @@ function DestinationGrid() {
     },
     {
       id: 5,
-      image: "/src/assets/images/pantai_Tambakrejo.jpg",
+      image: pantaiTambakrejo,
       title: "Tambakrejo Beach",
       subtitle: "Blitar, East Java",
       mapLocation: {
@@ -136,7 +149,7 @@ function DestinationGrid() {
     },
     {
       id: 6,
-      image: "/src/assets/images/pantai-serang.jpg",
+      image: pantaiSerang,
       title: "Serang Beach",
       subtitle: "Blitar, East Java",
       mapLocation: {
@@ -158,7 +171,7 @@ function DestinationGrid() {
     },
     {
       id: 7,
-      image: "/src/assets/images/Pantai-Jolosutro.jpg",
+      image: pantaiJolosutro,
       title: "Jolosutro Beach",
       subtitle: "Blitar, East Java",
       mapLocation: {
@@ -180,7 +193,7 @@ function DestinationGrid() {
     },
     {
       id: 8,
-      image: "/src/assets/images/coban wilis.jpg",
+      image: cobanWilis,
       title: "Coban Wilis Waterfall",
       subtitle: "Gandusari, Blitar",
       mapLocation: {
@@ -203,7 +216,7 @@ function DestinationGrid() {
     },
     {
       id: 9,
-      image: "/src/assets/images/jurug bening.webp",
+      image: jurugBening,
       title: "Jurug Bening Waterfall",
       subtitle: "Wates, Blitar",
       mapLocation: {
@@ -225,7 +238,7 @@ function DestinationGrid() {
     },
     {
       id: 10,
-      image: "/src/assets/images/maliran deer.webp",
+      image: maliranDeer,
       title: "Maliran Deer Conservation",
       subtitle: "Ponggok, Blitar",
       mapLocation: {
@@ -246,7 +259,7 @@ function DestinationGrid() {
     },
     {
       id: 11,
-      image: "/src/assets/images/kebon rojo.jpg",
+      image: kebonRojo,
       title: "Kebon Rojo Park",
       subtitle: "Sananwetan, Blitar",
       mapLocation: {
@@ -267,7 +280,7 @@ function DestinationGrid() {
     },
     {
       id: 12,
-      image: "/src/assets/images/blitar-jadoel.jpg",
+      image: blitarJadoel,
       title: "Kampung Coklat",
       subtitle: "Plosorejo, Blitar",
       mapLocation: {

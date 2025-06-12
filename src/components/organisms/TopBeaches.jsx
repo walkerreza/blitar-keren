@@ -1,36 +1,43 @@
 import { useState, useRef, useEffect } from 'react';
 import BeachCard from '../molecules/BeachCard';
 
+import pantaiTambakrejo from '../../assets/images/pantai_Tambakrejo.jpg';
+import pantaiSerang from '../../assets/images/pantai-serang.jpg';
+import pantaiJolosutro from '../../assets/images/Pantai-Jolosutro.jpg';
+import pantaiPangi from '../../assets/images/pangi.jpg';
+import pantaiPasur from '../../assets/images/pantaipasur.jpg';
+import pantaiPehPulo from '../../assets/images/pantai-peh-pulo.jpg';
+
 function TopBeaches() {
   const beaches = [
     {
       id: 1,
-      image: "/src/assets/images/pantai_Tambakrejo.jpg",
+      image: pantaiTambakrejo,
       title: "Tambakrejo Beach"
     },
     {
       id: 2,
-      image: "/src/assets/images/pantai-serang.jpg",
+      image: pantaiSerang,
       title: "Serang Beach"
     },
     {
       id: 3,
-      image: "/src/assets/images/Pantai-Jolosutro.jpg",
+      image: pantaiJolosutro,
       title: "Jolosutro Beach"
     },
     {
       id: 4,
-      image: "/src/assets/images/pangi.jpg",
+      image: pantaiPangi,
       title: "Pangi Beach"
     },
     {
       id: 5,
-      image: "/src/assets/images/pantaipasur.jpg",
+      image: pantaiPasur,
       title: "Pasur Beach"
     },
     {
       id: 6,
-      image: "/src/assets/images/pantai-peh-pulo.jpg",
+      image: pantaiPehPulo,
       title: "Peh Beach"
     }
   ];

@@ -11,7 +11,7 @@ import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/blitar-keren">
       <div className="min-h-screen w-full overflow-hidden bg-white" style={{width: '100%', maxWidth: '100%', margin: 0, padding: 0}}>
         <Routes>
           <Route path="/" element={<LandingPage />} />

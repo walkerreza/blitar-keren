@@ -2,36 +2,44 @@ import { useState, useRef, useEffect } from 'react';
 import SectionTitle from '../atoms/SectionTitle';
 import LocationCard from '../molecules/LocationCard';
 
+// Import images
+import gunungKelud from '../../assets/images/gunung kelud.jpg';
+import candiPenataran from '../../assets/images/candi penataran.jpg';
+import makamSoekarno from '../../assets/images/Makam_Soekarno.jpg';
+import istanaGebang from '../../assets/images/istana-gebang-blitar.jpg';
+import pantaiTambakrejo from '../../assets/images/pantai_Tambakrejo.jpg';
+import pantaiSerang from '../../assets/images/pantai-serang.jpg';
+
 function TopLocations() {
   const locations = [
     {
       id: 1,
-      image: "/src/assets/images/gunung kelud.jpg",
+      image: gunungKelud,
       title: "Mount Kelud"
     },
     {
       id: 2,
-      image: "/src/assets/images/candi penataran.jpg",
+      image: candiPenataran,
       title: "Penataran Temple"
     },
     {
       id: 3,
-      image: "/src/assets/images/Makam_Soekarno.jpg",
+      image: makamSoekarno,
       title: "Bung Karno Tomb"
     },
     {
       id: 4,
-      image: "/src/assets/images/istana-gebang-blitar.jpg",
+      image: istanaGebang,
       title: "Istana Gebang"
     },
     {
       id: 5,
-      image: "/src/assets/images/pantai_Tambakrejo.jpg",
+      image: pantaiTambakrejo,
       title: "Tambakrejo Beach"
     },
     {
       id: 6,
-      image: "/src/assets/images/pantai-serang.jpg",
+      image: pantaiSerang,
       title: "Serang Beach"
     }
   ];

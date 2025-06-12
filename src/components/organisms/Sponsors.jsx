@@ -1,32 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import logoKabBlitar from '../../assets/images/sponsors/Lambang_Kabupaten_Blitar.webp.png';
+import logoKumparan from '../../assets/images/sponsors/Kumparan-Logo-V4-300x117.png';
+import logoDetik from '../../assets/images/sponsors/detik.com.png';
+import logoKotaBlitar from '../../assets/images/sponsors/Lambang_Kota_Blitar.png';
+import logoUgm from '../../assets/images/sponsors/image 46.png';
+
+import blitarJadoel from '../../assets/images/blitar-jadoel.jpg';
+import benCarnival from '../../assets/images/foto-ben-carnival.jpg';
+import grebekPancasila from '../../assets/images/grebek-pancasila.jpg';
+
 function Sponsors() {
   const sponsors = [
     {
       id: 1,
       name: 'Kabupaten Blitar',
-      logo: '/src/assets/images/sponsors/Lambang_Kabupaten_Blitar.webp.png',
+      logo: logoKabBlitar,
     },
     {
       id: 2,
       name: 'Kumparan',
-      logo: '/src/assets/images/sponsors/Kumparan-Logo-V4-300x117.png',
+      logo: logoKumparan,
     },
     {
       id: 3,
       name: 'Detik.com',
-      logo: '/src/assets/images/sponsors/detik.com.png',
+      logo: logoDetik,
     },
     {
       id: 4,
       name: 'Kota Blitar',
-      logo: '/src/assets/images/sponsors/Lambang_Kota_Blitar.png',
+      logo: logoKotaBlitar,
     },
     {
       id: 5,
       name: 'UGM',
-      logo: '/src/assets/images/sponsors/image 46.png',
+      logo: logoUgm,
     },
   ];
 
@@ -34,17 +44,17 @@ function Sponsors() {
     {
       id: 1,
       name: 'Blitar Jadoel',
-      image: '/src/assets/images/blitar-jadoel.jpg',
+      image: blitarJadoel,
     },
     {
       id: 2,
       name: 'Ben Carnival Festival',
-      image: '/src/assets/images/foto-ben-carnival.jpg',
+      image: benCarnival,
     },
     {
       id: 3,
       name: 'Grebek Pancasila',
-      image: '/src/assets/images/grebek-pancasila.jpg',
+      image: grebekPancasila,
     },
   ];
 

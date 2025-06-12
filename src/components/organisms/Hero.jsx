@@ -1,6 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import Button from '../atoms/Button';
 
+
+import heroVideo from '../../assets/Video/Menyusuri Untaian Sejarah dan Keindahan Alam di Kota Blitar.mp4';
+
 function Hero() {
   const videoRef = useRef(null);
   
@@ -43,7 +46,7 @@ function Hero() {
               pointerEvents: 'none'
             }}
           >
-            <source src="/src/assets/Video/Menyusuri Untaian Sejarah dan Keindahan Alam di Kota Blitar.mp4" type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
             Sorry, your browser does not support the video tag.
           </video>
         </div>

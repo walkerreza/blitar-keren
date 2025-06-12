@@ -1,6 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import gunungKelud from '../../assets/images/gunung kelud.jpg';
+import candiPenataran from '../../assets/images/candi penataran.jpg';
+import makamSoekarno from '../../assets/images/Makam_Soekarno.jpg';
+import istanaGebang from '../../assets/images/istana-gebang-blitar.jpg';
+import pantaiTambakrejo from '../../assets/images/pantai_Tambakrejo.jpg';
+import pantaiSerang from '../../assets/images/pantai-serang.jpg';
+import pantaiJolosutro from '../../assets/images/Pantai-Jolosutro.jpg';
+import cobanWilis from '../../assets/images/coban wilis.jpg';
+import jurugBening from '../../assets/images/jurug bening.webp';
+
 function BlitarMap() {
   const mapRef = useRef(null);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -17,7 +27,7 @@ function BlitarMap() {
         lng: 112.3083
       },
       description: "Mount Kelud is one of East Java's most active volcanoes, offering breathtaking views of its crater lake.",
-      image: "/src/assets/images/gunung kelud.jpg"
+      image: gunungKelud
     },
     {
       id: 2,
@@ -28,7 +38,7 @@ function BlitarMap() {
         lng: 112.2091
       },
       description: "Discover the largest Hindu temple complex in East Java. Built over several centuries, Penataran Temple showcases intricate carvings and rich historical significance.",
-      image: "/src/assets/images/candi penataran.jpg"
+      image: candiPenataran
     },
     {
       id: 3,
@@ -39,7 +49,7 @@ function BlitarMap() {
         lng: 112.1672
       },
       description: "Visit the final resting place of Indonesia's first president, Sukarno. This historical site features beautiful architecture and offers insights into Indonesia's struggle for independence.",
-      image: "/src/assets/images/Makam_Soekarno.jpg"
+      image: makamSoekarno
     },
     {
       id: 4,
@@ -50,7 +60,7 @@ function BlitarMap() {
         lng: 112.1763
       },
       description: "Istana Gebang is the childhood home of President Sukarno that has been converted into a museum.",
-      image: "/src/assets/images/istana-gebang-blitar.jpg"
+      image: istanaGebang
     },
     {
       id: 5,
@@ -61,7 +71,7 @@ function BlitarMap() {
         lng: 112.1253
       },
       description: "Tambakrejo Beach offers stunning views with its exotic black sand and waves suitable for surfing.",
-      image: "/src/assets/images/pantai_Tambakrejo.jpg"
+      image: pantaiTambakrejo
     },
     {
       id: 6,
@@ -72,7 +82,7 @@ function BlitarMap() {
         lng: 112.3417
       },
       description: "Serang Beach is one of the most beautiful beaches in Blitar with its clean white sand and clear seawater.",
-      image: "/src/assets/images/pantai-serang.jpg"
+      image: pantaiSerang
     },
     {
       id: 7,
@@ -83,7 +93,7 @@ function BlitarMap() {
         lng: 112.2051
       },
       description: "Jolosutro Beach is one of the beaches that is still natural with soft black sand and quite large waves.",
-      image: "/src/assets/images/Pantai-Jolosutro.jpg"
+      image: pantaiJolosutro
     },
     {
       id: 8,
@@ -94,7 +104,7 @@ function BlitarMap() {
         lng: 112.2639
       },
       description: "Coban Wilis Waterfall is one of the amazing waterfalls in Blitar that was affected by the eruption of Mount Kelud in 2014.",
-      image: "/src/assets/images/coban wilis.jpg"
+      image: cobanWilis
     },
     {
       id: 9,
@@ -105,7 +115,7 @@ function BlitarMap() {
         lng: 112.3639
       },
       description: "Jurug Bening Waterfall is a natural tourist destination that offers the beauty of a waterfall with exotic black rocks.",
-      image: "/src/assets/images/jurug bening.webp"
+      image: jurugBening
     }
   ];
   
@@ -253,7 +263,10 @@ function BlitarMap() {
     
     // Cleanup function
     return () => {
-      // No special cleanup needed for Leaflet
+      if (mapRef.current && mapRef.current.map) {
+        mapRef.current.map.remove();
+        mapRef.current.map = null;
+      }
     };
   }, [navigate]);
   

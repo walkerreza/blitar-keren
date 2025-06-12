@@ -2,32 +2,38 @@ import { useState } from 'react';
 import ArticleCard from '../molecules/ArticleCard';
 import { Link } from 'react-router-dom';
 
+// Import images
+import gunungKelud from '../../assets/images/gunung kelud.jpg';
+import candiPenataran from '../../assets/images/candi penataran.jpg';
+import makamSoekarno from '../../assets/images/Makam_Soekarno.jpg';
+import pantaiTambakrejo from '../../assets/images/pantai_Tambakrejo.jpg';
+
 function TopSelections() {
   const articles = [
     {
       id: 1,
-      image: "/src/assets/images/gunung kelud.jpg",
+      image: gunungKelud,
       title: "Exploring the Majestic Mount Kelud",
       description: "A thrilling adventure to Mount Kelud's crater lake and surrounding natural wonders. Experience the breathtaking views and volcanic landscapes.",
       date: "May 21, 2023 • 5 min read"
     },
     {
       id: 2,
-      image: "/src/assets/images/candi penataran.jpg",
+      image: candiPenataran,
       title: "The Ancient Penataran Temple Complex",
       description: "Discover the largest and most important Hindu temple complex in East Java. A journey through time exploring the intricate carvings and historical significance.",
       date: "May 18, 2023 • 7 min read"
     },
     {
       id: 3,
-      image: "/src/assets/images/Makam_Soekarno.jpg",
+      image: makamSoekarno,
       title: "A Pilgrimage to Bung Karno's Tomb",
       description: "A moving visit to the final resting place of Indonesia's first president. Explore the historical significance and architectural beauty of this important site.",
       date: "May 15, 2023 • 6 min read"
     },
     {
       id: 4,
-      image: "/src/assets/images/pantai_Tambakrejo.jpg",
+      image: pantaiTambakrejo,
       title: "Beach Paradise: Tambakrejo and Serang",
       description: "Discover the hidden coastal gems of Blitar. Experience the pristine beaches, local seafood, and stunning sunsets along Blitar's southern coastline.",
       date: "May 10, 2023 • 8 min read"
