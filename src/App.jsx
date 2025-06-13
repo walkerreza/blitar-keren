@@ -10,8 +10,11 @@ import TicketOrderPage from './pages/TicketOrderPage'
 import LoginPage from './pages/LoginPage'
 
 function App() {
+  // Set basename dynamically based on the environment
+  const basename = import.meta.env.PROD ? '/blitar-keren/' : '/';
+
   return (
-    <Router basename="/blitar-keren/">
+    <Router basename={basename}>
       <div className="min-h-screen w-full overflow-hidden bg-white" style={{width: '100%', maxWidth: '100%', margin: 0, padding: 0}}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
