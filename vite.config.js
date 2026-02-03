@@ -10,9 +10,6 @@ export default defineConfig(({ command }) => {
     },
   };
 
-  if (command === 'build') {
-    config.base = '/blitar-keren/';
-  }
 
   return config;
 });
