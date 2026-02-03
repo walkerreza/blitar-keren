@@ -11,7 +11,7 @@ import LoginPage from './pages/LoginPage'
 
 function App() {
   // Set basename dynamically based on the environment
-  const basename = import.meta.env.PROD ? '/blitar-keren/' : '/';
+ // const basename = import.meta.env.PROD ? '/blitar-keren/' : '/';
 
   return (
     <Router basename={basename}>
